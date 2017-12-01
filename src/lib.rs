@@ -4,16 +4,10 @@ pub mod bindings {
     }
 }
 
-/*pub struct GeckoMedia;
+pub struct GeckoMedia;
 impl GeckoMedia {
     pub fn shutdown() -> Result<(), ()> {
+        unsafe { bindings::GeckoMedia_QueueRustRunnable() };
         Ok(())
     }
-
-    pub fn queue_task(&self) {
-        unsafe { bindings::GeckoMedia_QueueRustRunnable() };
-    }
-}*/
-pub fn foo() {
-    unsafe { bindings::GeckoMedia_QueueRustRunnable() };
 }
