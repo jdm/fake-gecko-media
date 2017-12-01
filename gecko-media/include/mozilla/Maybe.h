@@ -279,11 +279,7 @@ public:
     return *static_cast<const T*>(data());
   }
 
-  /*
-   * Returns the contents of this Maybe<T> by ref. If |isNothing()|, returns
-   * the default value provided.
-   */
-  T& refOr(T& aDefault)
+  /*  T& refOr(T& aDefault)
   {
     if (isSome()) {
       return ref();
@@ -299,10 +295,6 @@ public:
     return aDefault;
   }
 
-  /*
-   * Returns the contents of this Maybe<T> by ref. If |isNothing()|, returns the
-   * value returned from the function or functor provided.
-   */
   template<typename F>
   T& refOrFrom(F&& aFunc)
   {
@@ -333,8 +325,6 @@ public:
     return ref();
   }
 
-  /* If |isSome()|, runs the provided function or functor on the contents of
-   * this Maybe. */
   template<typename Func>
   Maybe& apply(Func aFunc)
   {
@@ -353,10 +343,6 @@ public:
     return *this;
   }
 
-  /*
-   * If |isSome()|, runs the provided function and returns the result wrapped
-   * in a Maybe. If |isNothing()|, returns an empty Maybe value.
-   */
   template<typename Func>
   auto map(Func aFunc) -> Maybe<decltype(aFunc(DeclVal<Maybe<T>>().ref()))>
   {
@@ -379,9 +365,8 @@ public:
       return val;
     }
     return Maybe<ReturnType>();
-  }
+  }*/
 
-  /* If |isSome()|, empties this Maybe and destroys its contents. */
   void reset()
   {
     if (isSome()) {
@@ -390,11 +375,7 @@ public:
     }
   }
 
-  /*
-   * Constructs a T value in-place in this empty Maybe<T>'s storage. The
-   * arguments to |emplace()| are the parameters to T's constructor.
-   */
-  template<typename... Args>
+  /*  template<typename... Args>
   void emplace(Args&&... aArgs)
   {
     MOZ_ASSERT(!mIsSome);
@@ -411,7 +392,7 @@ public:
       aStream << "<Nothing>";
     }
     return aStream;
-  }
+    }*/
 };
 
 } // namespace mozilla
