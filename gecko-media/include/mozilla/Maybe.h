@@ -51,10 +51,7 @@ public:
     }
   }
 
-  /**
-   * Maybe<T> can be copy-constructed from a Maybe<U> if U is convertible to T.
-   */
-  template<typename U,
+  /*template<typename U,
            typename =
              typename std::enable_if<std::is_convertible<U, T>::value>::type>
   MOZ_IMPLICIT
@@ -75,9 +72,6 @@ public:
     }
   }
 
-  /**
-   * Maybe<T> can be move-constructed from a Maybe<U> if U is convertible to T.
-   */
   template<typename U,
            typename =
              typename std::enable_if<std::is_convertible<U, T>::value>::type>
@@ -89,9 +83,9 @@ public:
       emplace(Move(*aOther));
       aOther.reset();
     }
-  }
+    }*/
 
-  Maybe& operator=(const Maybe& aOther)
+  /*Maybe& operator=(const Maybe& aOther)
   {
     if (&aOther != this) {
       if (aOther.mIsSome) {
@@ -161,22 +155,16 @@ public:
     return *this;
   }
 
-  /* Methods that check whether this Maybe contains a value */
-  explicit operator bool() const { return isSome(); }
+  explicit operator bool() const { return isSome(); }*/
   bool isSome() const { return mIsSome; }
-  bool isNothing() const { return !mIsSome; }
+  /*bool isNothing() const { return !mIsSome; }
 
-  /* Returns the contents of this Maybe<T> by value. Unsafe unless |isSome()|. */
   T value() const
   {
     MOZ_ASSERT(mIsSome);
     return ref();
   }
 
-  /*
-   * Returns the contents of this Maybe<T> by value. If |isNothing()|, returns
-   * the default value provided.
-   */
   template<typename V>
   T valueOr(V&& aDefault) const
   {
@@ -186,10 +174,6 @@ public:
     return Forward<V>(aDefault);
   }
 
-  /*
-   * Returns the contents of this Maybe<T> by value. If |isNothing()|, returns
-   * the value returned from the function or functor provided.
-   */
   template<typename F>
   T valueOrFrom(F&& aFunc) const
   {
@@ -199,7 +183,6 @@ public:
     return aFunc();
   }
 
-  /* Returns the contents of this Maybe<T> by pointer. Unsafe unless |isSome()|. */
   T* ptr()
   {
     MOZ_ASSERT(mIsSome);
@@ -212,10 +195,6 @@ public:
     return &ref();
   }
 
-  /*
-   * Returns the contents of this Maybe<T> by pointer. If |isNothing()|,
-   * returns the default value provided.
-   */
   T* ptrOr(T* aDefault)
   {
     if (isSome()) {
@@ -232,10 +211,6 @@ public:
     return aDefault;
   }
 
-  /*
-   * Returns the contents of this Maybe<T> by pointer. If |isNothing()|,
-   * returns the value returned from the function or functor provided.
-   */
   template<typename F>
   T* ptrOrFrom(F&& aFunc)
   {
@@ -264,20 +239,19 @@ public:
   {
     MOZ_ASSERT(mIsSome);
     return ptr();
-  }
+    }*/
 
-  /* Returns the contents of this Maybe<T> by ref. Unsafe unless |isSome()|. */
   T& ref()
   {
     MOZ_ASSERT(mIsSome);
     return *static_cast<T*>(data());
   }
 
-  const T& ref() const
+  /*const T& ref() const
   {
     MOZ_ASSERT(mIsSome);
     return *static_cast<const T*>(data());
-  }
+  }*/
 
   /*  T& refOr(T& aDefault)
   {
