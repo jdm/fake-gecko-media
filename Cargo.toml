@@ -1,0 +1,10 @@
+[package]
+name = "gecko-media"
+version = "0.1.0"
+authors = ["Josh Matthews <josh@joshmatthews.net>"]
+
+[lib]
+name = "gecko_media"
+
+[build-dependencies]
+cmake = "0.1.26"
